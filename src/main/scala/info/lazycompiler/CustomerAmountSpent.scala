@@ -1,6 +1,6 @@
 package main.scala.info.lazycompiler
 
-object CustomerTimeSpent {
+object CustomerAmountSpent {
 
   def main(args: Array[String]): Unit = {
 
@@ -11,6 +11,7 @@ object CustomerTimeSpent {
     val op = rdd
       .map(x => {val split = x.split(","); (split(0), split(2).toFloat)})
       .reduceByKey((x, y) => x + y)
+      .sortBy(x => x._2, ascending = false)
       .collect()
 
     op.foreach(println)

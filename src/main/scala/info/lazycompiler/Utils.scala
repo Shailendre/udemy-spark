@@ -10,8 +10,13 @@ object Utils {
 
   def _init(file: String, contextName: String): RDD[String] = {
 
-    Logger.getLogger("org").setLevel(Level.ERROR);
+    Logger.getLogger("org").setLevel(Level.ERROR)
     val sc: SparkContext = new SparkContext("local[*]", contextName)
+    sc.textFile(resourcePath + file)
+  }
+
+  def _init(file: String, sc: SparkContext): RDD[String] = {
+    Logger.getLogger("org").setLevel(Level.ERROR)
     sc.textFile(resourcePath + file)
   }
 
